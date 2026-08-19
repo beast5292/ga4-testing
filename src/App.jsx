@@ -3,12 +3,14 @@ import './App.css'
 function App() {
 
   const trackEvent = (eventName, eventData = {}) => {
-    if (window.gtag) {
-      window.gtag('event', eventName, eventData)
-      console.log('GA4 Event:', eventName, eventData)
-    } else {
-      console.log('gtag is not loaded')
-    }
+    window.dataLayer = window.dataLayer || []
+
+    window.dataLayer.push({
+      event: eventName,
+      ...eventData
+    })
+
+    console.log('GTM Event:', eventName, eventData)
   }
 
   return (
